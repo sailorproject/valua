@@ -72,3 +72,9 @@ http://etiene.net
 http://twitter.com/MulherCerebro
 
 License: MIT
+
+
+
+Inspired on Respect Validation for PHP
+
+https://github.com/Respect/Validation
