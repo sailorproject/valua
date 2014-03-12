@@ -36,7 +36,8 @@ function valua:new(obj)
 		--saves a function named _<index> with its args in a funcs table, to be used later when validating
 		return function(...) 
 			local args = {...}
-			local f = function(value) return valua['_'..k](value,unpack(args)) end
+			local n = select("#", ...)
+			local f = function(value) return valua['_'..k](value, unpack(args, 1, n)) end
 			tinsert(t.funcs,f)
 			return t 
 		end 
