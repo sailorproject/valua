@@ -22,6 +22,7 @@
 local valua = {}
 
 local tinsert,setmetatable,len,match,tonumber = table.insert,setmetatable,string.len,string.match,tonumber
+local next,type,floor,ipairs = next,type,math.floor, ipairs
 
 -- CORE
 -- Caution, this is confusing
@@ -74,21 +75,11 @@ end
 
 -- aux funcs
 local function empty(v)
-	return not v or len(v) == 0
+	return not v or (type(v)=='string' and len(v) == 0) or (type(v)=='table' and not next(v))
 end
 --
 
 -- String
-function valua._empty(value)
-	if not empty(value) then return false,"must be empty" end
-	return true
-end
-
-function valua._not_empty(value)
-	if empty(value) then return false,"must not be empty" end
-	return true
-end
-
 function valua._len(value,min,max)
 	local len = len(value or '')
 	if len < min or len >max then return false,"should have "..min.."-"..max.." characters" end
@@ -140,7 +131,7 @@ function valua._max(value,n)
 end
 
 function valua._integer(value)
-	if math.floor(value) ~= value then return false, "must be an integer" end
+	if floor(value) ~= value then return false, "must be an integer" end
 	return true
 end
 --
@@ -180,6 +171,16 @@ end
 --
 
 -- Abstract
+function valua._empty(value)
+	if not empty(value) then return false,"must be empty" end
+	return true
+end
+
+function valua._not_empty(value)
+	if empty(value) then return false,"must not be empty" end
+	return true
+end
+
 function valua._type(value,value_type)
 	if type(value) ~= value_type then return false,"must be a "..value_type end
 	return true
