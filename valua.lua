@@ -1,4 +1,4 @@
--- Valua 0.2
+-- Valua 0.2.1
 -- Copyright (c) 2014 Etiene Dalcol
 -- License: MIT
 --
