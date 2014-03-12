@@ -5,7 +5,12 @@ A module for making chained validations. Create your objects, append your tests,
 Originally bundled with Sailor MVC Web Framework, now released as a separated module.
   https://github.com/Etiene/sailor
 
-This module provides tools for validating values, very useful in forms, but also usable elsewhere. It works in appended chains. Create a new validation object and start chaining your test functions. If your value fails a test, it breaks the chain and does not evaluate the rest of it. It returns a boolean and an error string (nil when tests succeeded)
+This module provides tools for validating values, very useful in forms, but also usable elsewhere. It works in appended chains. Create a new validation object and start chaining your test functions. If your value fails a test, it breaks the chain and does not evaluate the rest of it. It returns a boolean and an error string (nil when tests succeeded).
+
+Valua is also available through luarocks
+````
+luarocks install valua
+````
 
 ####Usage
 Example 1 - Just create, chain and use:
@@ -63,5 +68,7 @@ Checks if a value is of type t.
 Copyright (c) 2014 Etiene Dalcol
 
 http://etiene.net
+
+http://twitter.com/MulherCerebro
 
 License: MIT
