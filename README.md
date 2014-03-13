@@ -27,13 +27,13 @@ reusable_validation("test!") -- true
 ####Current validation functions
 
   * alnum() - 
-Checks if string is alfanumeric.
+Checks if string is alphanumeric.
   * boolean() - 
 Checks if value is a boolean.
   * compare(another_value) - 
 Checks if value is equal to another value.
   * contains(substr) - 
-Check if a string contains a substring.
+Checks if a string contains a substring.
   * date() or date(format) -  
 Checks if a string is a valid date. Default format is UK (dd/mm/yyyy). Also checks for US and ISO formats.
   * email() - 
@@ -75,6 +75,6 @@ License: MIT
 
 
 
-Inspired on Respect Validation for PHP
+Inspired by Respect Validation for PHP
 
 https://github.com/Respect/Validation
