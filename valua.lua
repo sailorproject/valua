@@ -93,7 +93,7 @@ function valua._compare(value,another_value)
 end
 
 function valua._email(value)
-	if not value:match("[A-Za-z0-9%.%%%+%-]+@[A-Za-z0-9%.%%%+%-]+%.%w%w+") then
+	if not value:match("^[%w+%.%-_]+@[%w+%.%-_]+%.%a%a+$") then
   		return false, "is not a valid email address" 
   	end
   	return true

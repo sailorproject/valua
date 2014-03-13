@@ -7,7 +7,7 @@ local function check(val_test, test_value, expected, n)
 	if res == expected then 
 		msg = msg.. "succeeded"
 	else 
-		msg = msg.. "FAILED" 
+		msg = msg.. " \27[31m FAILED \27[0m" 
 	end
 	msg = msg.." on '"..(tostring(test_value)).."'. Expected: "..tostring(expected)..", result: "..tostring(res)..". " 
 	print(msg)
@@ -30,7 +30,9 @@ local test_values = {
         'asd123',
         5.7,
         {},
-        {3,46}
+        {3,46},
+        "<script>alert('boohoo@email.com XSS');</script>",
+        "test-123_maria.2@newdomain.wow.movie"
 }
 
 local tests = {
@@ -47,7 +49,7 @@ local tests = {
         {v:new().number().max(1009),{7,false,6,true}},
         {v:new().date(),{9,false,10,false,11,true,8,true}},
         {v:new().date('us'),{8,false,9,true}},
-        {v:new().email(),{13,false,12,true}},
+        {v:new().email(),{13,false,12,true,17,false,18,true}},
         {v:new().in_list({"hey",42}),{12,false,6,true,2,true}},
         {v:new().match("^%d+%p%d+%p%d%d%d%d$"),{1,false,8,true}},
         {v:new().alnum(),{8,false,13,true}},
