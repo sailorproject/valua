@@ -69,7 +69,7 @@ Copyright (c) 2014 Etiene Dalcol
 
 http://etiene.net
 
-http://twitter.com/MulherCerebro
+http://twitter.com/etiene_d
 
 License: MIT
 
