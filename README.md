@@ -1,5 +1,7 @@
 ##Valua - Validation for Lua
 
+[![Build Status](https://travis-ci.org/Etiene/valua.svg?branch=master)](https://travis-ci.org/Etiene/valua)
+
 A module for making chained validations. Create your objects, append your tests, use and reuse it!
 
 Originally bundled with Sailor MVC Web Framework, now released as a separated module.
