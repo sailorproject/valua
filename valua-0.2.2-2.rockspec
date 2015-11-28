@@ -1,8 +1,8 @@
 package = "valua"
 version = "0.2.2-2"
 source = {
-   url = "https://github.com/Etiene/valua/archive/0.2.2.zip",
-   tag = "valua-0.2.2"
+   url = "git://github.com/Etiene/valua",
+   tag = "0.2.2"
 }
 description = {
    summary = "Validation for Lua!",
