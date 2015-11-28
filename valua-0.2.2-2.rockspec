@@ -1,7 +1,7 @@
 package = "valua"
 version = "0.2.2-2"
 source = {
-   url = "https://github.com/Etiene/valua/releases/download/0.2.2/valua-0.2.2.tar.gz",
+   url = "https://github.com/Etiene/valua/archive/0.2.2.zip",
    tag = "valua-0.2.2"
 }
 description = {
