@@ -1,7 +1,7 @@
 package = "valua"
-version = "0.2.2-2"
+version = "0.2.2-3"
 source = {
-   url = "git://github.com/Etiene/valua",
+   url = "https://github.com/sailorproject/valua/releases/download/0.2.2/valua-0.2.2.tar.gz",
    tag = "0.2.2"
 }
 description = {
@@ -9,7 +9,7 @@ description = {
    detailed = [[
       This module provides tools for validating values, very useful in forms, but also usable elsewhere. It works in appended chains. Create a new validation object and start chaining your test functions.
    ]],
-   homepage = "https://github.com/Etiene/valua", 
+   homepage = "https://github.com/sailorproject/valua", 
    license = "MIT"
 }
 dependencies = {
