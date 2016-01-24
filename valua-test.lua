@@ -1,4 +1,5 @@
 local v = require "valua"
+local passing = true
 
 local function check(val_test, test_value, expected, n) 
 	local res,err = val_test(test_value)
@@ -7,6 +8,7 @@ local function check(val_test, test_value, expected, n)
 	if res == expected then 
 		msg = msg.. "succeeded"
 	else 
+                passing = false
 		msg = msg.. " \27[31m FAILED \27[0m" 
 	end
 	msg = msg.." on '"..(tostring(test_value)).."'. Expected: "..tostring(expected)..", result: "..tostring(res)..". " 
@@ -64,4 +66,8 @@ for n,t in ipairs(tests) do
 	for i = 1, #t[2], 2 do
 		check(t[1],test_values[t[2][i]],t[2][i+1],n)
 	end
+end
+
+if not passing then
+        error('Tests are failing')
 end
