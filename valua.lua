@@ -94,46 +94,46 @@ function valua._compare(value,another_value)
 end
 
 function valua._email(value)
-	if not value:match("^[%w+%.%-_]+@[%w+%.%-_]+%.%a%a+$") then
+	if not empty(value) and not value:match("^[%w+%.%-_]+@[%w+%.%-_]+%.%a%a+$") then
   		return false, "is not a valid email address" 
   	end
   	return true
 end
 
 function valua._match(value,pattern)
-	if not value:match(pattern) then return false, "does not match pattern" end
+	if not empty(value) and not value:match(pattern) then return false, "does not match pattern" end
 	return true
 end
 
 function valua._alnum(value)
-	if value:match("%W") then return false, "constains improper characters" end
+	if not empty(value) and value:match("%W") then return false, "constains improper characters" end
 	return true
 end
 
 function valua._contains(value,substr)
-	if not value:find(substr) then return false, "does not contain '"..substr.."'" end
+	if not empty(value)  and not value:find(substr) then return false, "does not contain '"..substr.."'" end
 	return true
 end
 
 function valua._no_white(value)
-	if value:find("%s") then return false, "must not contain white spaces" end
+	if not empty(value) and value:find("%s") then return false, "must not contain white spaces" end
 	return true
 end
 --
 
 -- Numbers
 function valua._min(value,n)
-	if value < n then return false,"must be greater than "..n end
+	if not empty(value) and value < n then return false,"must be greater than "..n end
 	return true
 end
 
 function valua._max(value,n)
-	if value > n then return false,"must not be greater than "..n end
+	if not empty(value)  and value > n then return false,"must not be greater than "..n end
 	return true
 end
 
 function valua._integer(value)
-	if floor(value) ~= value then return false, "must be an integer" end
+	if not empty(value) and floor(tonumber(value)) ~= tonumber(value)  then return false, "must be an integer" end
 	return true
 end
 --
