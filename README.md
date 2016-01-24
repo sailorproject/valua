@@ -1,6 +1,6 @@
 ##Valua - Validation for Lua
 
-[![Build Status](https://travis-ci.org/Etiene/valua.svg?branch=master)](https://travis-ci.org/Etiene/valua)
+[![Build Status](https://travis-ci.org/sailorproject/valua.svg?branch=master)](https://travis-ci.org/Etiene/valua)
 
 A module for making chained validations. Create your objects, append your tests, use and reuse it!
 
