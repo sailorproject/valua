@@ -1,7 +1,7 @@
 package = "valua"
 version = "0.3-1"
 source = {
-   url = "git://github.com/sailorproject/sailor",
+   url = "git://github.com/sailorproject/valua",
    tag = "0.3"
 }
 description = {
