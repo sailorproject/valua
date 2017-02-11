@@ -1,4 +1,4 @@
-local v = require "valuaa"
+local v = require "valua"
 local passing = true
 
 local function check(val_test, test_value, expected, n) 
