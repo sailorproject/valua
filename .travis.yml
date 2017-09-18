@@ -22,7 +22,7 @@ install:
   - luarocks install luacheck
 
 script: 
-  # - luacheck --codes --std=max *.lua
+  - luacheck --codes --std=max *.lua
   - lua valua-test.lua
 
 after_success:

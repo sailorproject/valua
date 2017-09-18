@@ -49,7 +49,7 @@ function valua:new(obj)
 		local res = true
 		local fres, err
 		-- iterates through all chained validations funcs that were packed, passing the value to be validated
-		for i,f in ipairs(t.funcs) do
+		for _,f in ipairs(t.funcs) do
 			fres,err = f(value)
 			res = res and fres
 			-- breaks the chain if a test fails
@@ -83,8 +83,8 @@ end
 
 -- String
 function valua._len(value,min,max)
-	local len = len(value or '')
-	if len < min or len >max then return false,"should have "..min.."-"..max.." characters" end
+	local l = len(value or '')
+	if l < min or l > max then return false,"should have "..min.."-"..max.." characters" end
 	return true
 end
 
