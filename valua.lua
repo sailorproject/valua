@@ -19,12 +19,14 @@
 --	reusable_validation("test!") -- true
 --
 
-local valua = {}
-
 local tinsert,setmetatable,len,match,tonumber = table.insert,setmetatable,string.len,string.match,tonumber
 local next,type,floor,ipairs = next,type,math.floor, ipairs
 local unpack   = unpack or table.unpack
 local pack     = table.pack or function(...) return { n = select('#', ...), ... } end
+
+local _ENV = nil
+
+local valua = {}
 
 -- CORE
 -- Caution, this is confusing
