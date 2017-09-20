@@ -36,12 +36,12 @@ function valua:new(obj)
 	-- __index will be called always when chaining validation functions
 	self.__index = function(t,k)
 		--saves a function named _<index> with its args in a funcs table, to be used later when validating
-		return function(...) 
+		return function(...)
 			local args = pack(...)
 			local f = function(value) return valua['_'..k](value, unpack(args, 1, args.n)) end
 			tinsert(t.funcs,f)
-			return t 
-		end 
+			return t
+		end
 	end
 
 	-- __call will run only when the value is validated
@@ -66,12 +66,12 @@ end
 --
 
 -- VALIDATION FUNCS
--- Add new funcs at will, they all should have the value to be validated as first parameter 
+-- Add new funcs at will, they all should have the value to be validated as first parameter
 --   and their names must be preceded by '_'.
--- For example, if you want to use .custom_val(42) on your validation chain, you need to create a 
+-- For example, if you want to use .custom_val(42) on your validation chain, you need to create a
 --   function valua._custom_val(<value var>,<other var>). Just remember the value var will be known
 --   at the end of the chain and the other var, in this case, will receive '42'. You can add multiple other vars.
--- These functions can be called directly (valua._len("test",2,5))in a non-chained and isolated way of life 
+-- These functions can be called directly (valua._len("test",2,5))in a non-chained and isolated way of life
 --   for quick stuff, but chaining is much cooler!
 -- Return false,'<error message>' if the value fails the test and simply true if it succeeds.
 
@@ -95,9 +95,9 @@ end
 
 function valua._email(value)
 	if not empty(value) and not value:match("^[%w+%.%-_]+@[%w+%.%-_]+%.%a%a+$") then
-  		return false, "is not a valid email address" 
-  	end
-  	return true
+		return false, "is not a valid email address"
+	end
+	return true
 end
 
 function valua._match(value,pattern)
@@ -142,33 +142,33 @@ end
 
 --  Check for a UK date pattern dd/mm/yyyy , dd-mm-yyyy, dd.mm.yyyy
 --  or US pattern mm/dd/yyyy, mm-dd-yyyy, mm.dd.yyyy
---  or ISO pattern yyyy/mm/dd, yyyy-mm-dd, yyyy.mm.dd 
+--  or ISO pattern yyyy/mm/dd, yyyy-mm-dd, yyyy.mm.dd
 --  Default is UK
 function valua._date(value,format)
-    local valid = true
-    if (match(value, "^%d+%p%d+%p%d%d%d%d$")) then
-        local d, m, y
-        if format and format:lower() == 'us' then
-        	m, d, y = match(value, "(%d+)%p(%d+)%p(%d+)")
-        elseif format and format:lower() == 'iso' then
-        	y, m, d = match(value, "(%d+)%p(%d+)%p(%d+)")
-        else
-        	d, m, y = match(value, "(%d+)%p(%d+)%p(%d+)")
-        end
-        d, m, y = tonumber(d), tonumber(m), tonumber(y)
+	local valid = true
+	if (match(value, "^%d+%p%d+%p%d%d%d%d$")) then
+		local d, m, y
+		if format and format:lower() == 'us' then
+			m, d, y = match(value, "(%d+)%p(%d+)%p(%d+)")
+		elseif format and format:lower() == 'iso' then
+			y, m, d = match(value, "(%d+)%p(%d+)%p(%d+)")
+		else
+			d, m, y = match(value, "(%d+)%p(%d+)%p(%d+)")
+		end
+		d, m, y = tonumber(d), tonumber(m), tonumber(y)
 
-        local dm2 = d*m*m
-        if  d>31 or m>12 or dm2==116 or dm2==120 or dm2==124 or dm2==496 or dm2==1116 or dm2==2511 or dm2==3751 then
-            -- invalid unless leap year
-            if not (dm2==116 and (y%400 == 0 or (y%100 ~= 0 and y%4 == 0))) then
-                valid = false
-            end
-        end
-    else
-        valid = false
-    end
-    if not valid then return false, "is not a valid date" end
-    return true
+		local dm2 = d*m*m
+		if  d>31 or m>12 or dm2==116 or dm2==120 or dm2==124 or dm2==496 or dm2==1116 or dm2==2511 or dm2==3751 then
+			-- invalid unless leap year
+			if not (dm2==116 and (y%400 == 0 or (y%100 ~= 0 and y%4 == 0))) then
+				valid = false
+			end
+		end
+	else
+		valid = false
+	end
+	if not valid then return false, "is not a valid date" end
+	return true
 end
 --
 
@@ -176,47 +176,47 @@ end
 
 --  Check for a UK date pattern dd/mm/yyyy hh:mi:ss, dd-mm-yyyy, dd.mm.yyyy
 --  or US pattern mm/dd/yyyy, mm-dd-yyyy, mm.dd.yyyy
---  or ISO pattern yyyy/mm/dd, yyyy-mm-dd, yyyy.mm.dd 
+--  or ISO pattern yyyy/mm/dd, yyyy-mm-dd, yyyy.mm.dd
 --  Default is UK
 function valua._datetime(value,format)
-    local valid = true
-    if (match(value, "^%d+%p%d+%p%d%d%d%d %d%d%p%d%d%p%d%d$")) then
-        local d, m, y, hh, mm, ss
-        if format and format:lower() == 'us' then
-        	m, d, y, hh, mm, ss = match(value, "(%d+)%p(%d+)%p(%d+) (%d%d)%p(%d%d)%p(%d%d)")
-        elseif format and format:lower() == 'iso' then
-        	y, m, d, hh, mm, ss = match(value, "(%d+)%p(%d+)%p(%d+) (%d%d)%p(%d%d)%p(%d%d)")
-        else
-        	d, m, y, hh, mm, ss = match(value, "(%d+)%p(%d+)%p(%d+) (%d%d)%p(%d%d)%p(%d%d)")
-        end
-        d, m, y, hh, mm, ss = tonumber(d), tonumber(m), tonumber(y), tonumber(hh), tonumber(mm), tonumber(ss)
+	local valid = true
+	if (match(value, "^%d+%p%d+%p%d%d%d%d %d%d%p%d%d%p%d%d$")) then
+		local d, m, y, hh, mm, ss
+		if format and format:lower() == 'us' then
+			m, d, y, hh, mm, ss = match(value, "(%d+)%p(%d+)%p(%d+) (%d%d)%p(%d%d)%p(%d%d)")
+		elseif format and format:lower() == 'iso' then
+			y, m, d, hh, mm, ss = match(value, "(%d+)%p(%d+)%p(%d+) (%d%d)%p(%d%d)%p(%d%d)")
+		else
+			d, m, y, hh, mm, ss = match(value, "(%d+)%p(%d+)%p(%d+) (%d%d)%p(%d%d)%p(%d%d)")
+		end
+		d, m, y, hh, mm, ss = tonumber(d), tonumber(m), tonumber(y), tonumber(hh), tonumber(mm), tonumber(ss)
 
-        local dm2 = d*m*m
-        if  d>31 or m>12 or dm2==116 or dm2==120 or dm2==124 or dm2==496 or dm2==1116 or dm2==2511 or dm2==3751 then
-            -- invalid unless leap year
-            if not (dm2==116 and (y%400 == 0 or (y%100 ~= 0 and y%4 == 0))) then
-                valid = false
-            end
-        end
+		local dm2 = d*m*m
+		if  d>31 or m>12 or dm2==116 or dm2==120 or dm2==124 or dm2==496 or dm2==1116 or dm2==2511 or dm2==3751 then
+			-- invalid unless leap year
+			if not (dm2==116 and (y%400 == 0 or (y%100 ~= 0 and y%4 == 0))) then
+				valid = false
+			end
+		end
 
 		-- time validation
 		if not (hh >= 0 and hh <= 24) then
 			valid = false
-		end 
+		end
 
 		if not (mm >= 0 and mm <= 60) then
 			valid = false
-		end 
+		end
 
 		if not (ss >= 0 and ss <= 60) then
 			valid = false
 		end
-	
-    else
-        valid = false
-    end
-    if not valid then return false, "is not a valid datetime" end
-    return true
+
+	else
+		valid = false
+	end
+	if not valid then return false, "is not a valid datetime" end
+	return true
 end
 --
 
