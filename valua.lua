@@ -172,6 +172,54 @@ function valua._date(value,format)
 end
 --
 
+-- Datetime
+
+--  Check for a UK date pattern dd/mm/yyyy hh:mi:ss, dd-mm-yyyy, dd.mm.yyyy
+--  or US pattern mm/dd/yyyy, mm-dd-yyyy, mm.dd.yyyy
+--  or ISO pattern yyyy/mm/dd, yyyy-mm-dd, yyyy.mm.dd 
+--  Default is UK
+function valua._datetime(value,format)
+    local valid = true
+    if (match(value, "^%d+%p%d+%p%d%d%d%d %d%d%p%d%d%p%d%d$")) then
+        local d, m, y, hh, mm, ss
+        if format and format:lower() == 'us' then
+        	m, d, y, hh, mm, ss = match(value, "(%d+)%p(%d+)%p(%d+) (%d%d)%p(%d%d)%p(%d%d)")
+        elseif format and format:lower() == 'iso' then
+        	y, m, d, hh, mm, ss = match(value, "(%d+)%p(%d+)%p(%d+) (%d%d)%p(%d%d)%p(%d%d)")
+        else
+        	d, m, y, hh, mm, ss = match(value, "(%d+)%p(%d+)%p(%d+) (%d%d)%p(%d%d)%p(%d%d)")
+        end
+        d, m, y, hh, mm, ss = tonumber(d), tonumber(m), tonumber(y), tonumber(hh), tonumber(mm), tonumber(ss)
+
+        local dm2 = d*m*m
+        if  d>31 or m>12 or dm2==116 or dm2==120 or dm2==124 or dm2==496 or dm2==1116 or dm2==2511 or dm2==3751 then
+            -- invalid unless leap year
+            if not (dm2==116 and (y%400 == 0 or (y%100 ~= 0 and y%4 == 0))) then
+                valid = false
+            end
+        end
+
+		-- time validation
+		if not (hh >= 0 and hh <= 24) then
+			valid = false
+		end 
+
+		if not (mm >= 0 and mm <= 60) then
+			valid = false
+		end 
+
+		if not (ss >= 0 and ss <= 60) then
+			valid = false
+		end
+	
+    else
+        valid = false
+    end
+    if not valid then return false, "is not a valid datetime" end
+    return true
+end
+--
+
 -- Abstract
 function valua._empty(value)
 	if not empty(value) then return false,"must be empty" end

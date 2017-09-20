@@ -34,7 +34,8 @@ local test_values = {
         {},
         {3,46},
         "<script>alert('boohoo@email.com XSS');</script>",
-        "test-123_maria.2@newdomain.wow.movie"
+        "test-123_maria.2@newdomain.wow.movie",
+        "10/06/1980 10:32:10"
 }
 
 local tests = {
@@ -59,7 +60,8 @@ local tests = {
         {v:new().string(),{14,false,1,true}},
         {v:new().string().alnum(),{6,false}},
         {v:new().contains(" "),{2,false,1,true}},
-        {v:new().no_white(),{1,false,2,true}}
+        {v:new().no_white(),{1,false,2,true}},
+        {v:new().datetime(),{19,true,9,false}}
 }
 
 for n,t in ipairs(tests) do
