@@ -1,6 +1,7 @@
 ##Valua - Validation for Lua
 
 [![Build Status](https://travis-ci.org/sailorproject/valua.svg?branch=master)](https://travis-ci.org/sailorproject/valua)
+[![Coverage Status](https://coveralls.io/repos/github/sailorproject/valua/badge.svg?branch=master)](https://coveralls.io/github/sailorproject/valua?branch=master)
 
 A module for making chained validations. Create your objects, append your tests, use and reuse it!
 

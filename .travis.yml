@@ -20,12 +20,15 @@ before_install:
 
 install:
   - luarocks install luacheck
+  - luarocks install luacov-coveralls
 
 script: 
   - luacheck --codes --std=max *.lua
   - lua valua-test.lua
 
 after_success:
+  - lua -lluacov valua-test.lua
+  - luacov-coveralls
 
 notifications:
   email:
