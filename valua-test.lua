@@ -1,67 +1,67 @@
 local v = require "valua"
 local passing = true
 
-local function check(val_test, test_value, expected, n) 
+local function check(val_test, test_value, expected, n)
 	local res,err = val_test(test_value)
 	local msg = "Validation "..n.." "
 
-	if res == expected then 
+	if res == expected then
 		msg = msg.. "succeeded"
-	else 
-                passing = false
-		msg = msg.. " \27[31m FAILED \27[0m" 
+	else
+		passing = false
+		msg = msg.. " \27[31m FAILED \27[0m"
 	end
-	msg = msg.." on '"..(tostring(test_value)).."'. Expected: "..tostring(expected)..", result: "..tostring(res)..". " 
+	msg = msg.." on '"..(tostring(test_value)).."'. Expected: "..tostring(expected)..", result: "..tostring(res)..". "
 	print(msg)
-	if err then print("\tTest Msg: value "..(err or "")) end 
-end 
+	if err then print("\tTest Msg: value "..(err or "")) end
+end
 
-local test_values = {  
-        "test string!",
+local test_values = {
+	"test string!",
 	"hey",
 	"",
-        nil,
-        true,
-        42,
-        1337,
-        '26/10/1980',
-        '10-26-1980',
-        '29.02.2014',
-        '29/02/2016',
-        'a@a.com',
-        'asd123',
-        5.7,
-        {},
-        {3,46},
-        "<script>alert('boohoo@email.com XSS');</script>",
-        "test-123_maria.2@newdomain.wow.movie",
-        "10/06/1980 10:32:10"
+	nil,
+	true,
+	42,
+	1337,
+	'26/10/1980',
+	'10-26-1980',
+	'29.02.2014',
+	'29/02/2016',
+	'a@a.com',
+	'asd123',
+	5.7,
+	{},
+	{3,46},
+	"<script>alert('boohoo@email.com XSS');</script>",
+	"test-123_maria.2@newdomain.wow.movie",
+	"10/06/1980 10:32:10"
 }
 
 local tests = {
 	{v:new().type("string").len(3,5),{1,false}},
 	{v:new().type("number").len(3,5), {1,false}},
-        {v:new().type("table").empty(),{15,true,16,false,1,false}},
+	{v:new().type("table").empty(),{15,true,16,false,1,false}},
 	{v:new().not_empty(),{2,true,3,false,4,false,16,true,5,true,6,true}},
 	{v:new().len(2,10),{2,true}},
 	{v:new().type("number"),{2,false}},
 	{v:new().empty(),{3,true,4,true,5,false,6,false}},
-        {v:new().boolean(),{1,false,5,true}},
-        {v:new().compare("hey"),{1,false,2,true}},
-        {v:new().number().min(45),{2,false,6,false,7,true}},
-        {v:new().number().max(1009),{7,false,6,true}},
-        {v:new().date(),{9,false,10,false,11,true,8,true}},
-        {v:new().date('us'),{8,false,9,true}},
-        {v:new().email(),{13,false,12,true,17,false,18,true}},
-        {v:new().in_list({"hey",42}),{12,false,6,true,2,true}},
-        {v:new().match("^%d+%p%d+%p%d%d%d%d$"),{1,false,8,true}},
-        {v:new().alnum(),{8,false,13,true}},
-        {v:new().integer(),{14,false,6,true}},
-        {v:new().string(),{14,false,1,true}},
-        {v:new().string().alnum(),{6,false}},
-        {v:new().contains(" "),{2,false,1,true}},
-        {v:new().no_white(),{1,false,2,true}},
-        {v:new().datetime(),{19,true,9,false}}
+	{v:new().boolean(),{1,false,5,true}},
+	{v:new().compare("hey"),{1,false,2,true}},
+	{v:new().number().min(45),{2,false,6,false,7,true}},
+	{v:new().number().max(1009),{7,false,6,true}},
+	{v:new().date(),{9,false,10,false,11,true,8,true}},
+	{v:new().date('us'),{8,false,9,true}},
+	{v:new().email(),{13,false,12,true,17,false,18,true}},
+	{v:new().in_list({"hey",42}),{12,false,6,true,2,true}},
+	{v:new().match("^%d+%p%d+%p%d%d%d%d$"),{1,false,8,true}},
+	{v:new().alnum(),{8,false,13,true}},
+	{v:new().integer(),{14,false,6,true}},
+	{v:new().string(),{14,false,1,true}},
+	{v:new().string().alnum(),{6,false}},
+	{v:new().contains(" "),{2,false,1,true}},
+	{v:new().no_white(),{1,false,2,true}},
+	{v:new().datetime(),{19,true,9,false}}
 }
 
 for n,t in ipairs(tests) do
@@ -71,5 +71,5 @@ for n,t in ipairs(tests) do
 end
 
 if not passing then
-        error('Tests are failing')
+	error('Tests are failing')
 end
