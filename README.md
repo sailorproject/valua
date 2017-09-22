@@ -1,4 +1,4 @@
-##Valua - Validation for Lua
+## Valua - Validation for Lua
 
 [![Build Status](https://travis-ci.org/sailorproject/valua.svg?branch=master)](https://travis-ci.org/sailorproject/valua)
 
@@ -14,7 +14,7 @@ Valua is also available through luarocks
 luarocks install valua
 ````
 
-####Usage
+#### Usage
 Example 1 - Just create, chain and use:
 ```lua
 valua:new().type("string").len(3,5)("test string!") -- false, "should have 3-5 characters"
@@ -26,7 +26,7 @@ reusable_validation("test string!") -- false, "should have 3-5 characters"
 reusable_validation("test!") -- true
 ```
 
-####Current validation functions
+#### Current validation functions
 
   * alnum() - 
 Checks if string is alphanumeric.
