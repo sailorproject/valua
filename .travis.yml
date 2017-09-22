@@ -21,8 +21,8 @@ before_install:
 install:
   - luarocks install luacheck
 
-script: 
-  - luacheck --codes --std=max *.lua
+script:
+  - luacheck --codes --std=max *.lua --ignore 211/_ENV
   - lua valua-test.lua
 
 after_success:
