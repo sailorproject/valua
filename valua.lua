@@ -19,7 +19,8 @@
 --	reusable_validation("test!") -- true
 --
 
-local tinsert,setmetatable,len,match,tonumber = table.insert,setmetatable,string.len,string.match,tonumber
+local tinsert,setmetatable,len,match = table.insert,setmetatable,string.len,string.match
+local tonumber,tostring = tonumber,tostring
 local next,type,floor,ipairs = next,type,math.floor, ipairs
 local unpack   = unpack or table.unpack
 local pack     = table.pack or function(...) return { n = select('#', ...), ... } end
@@ -86,7 +87,7 @@ end
 -- String
 function valua._len(value,min,max)
 	local l = len(value or '')
-	if l < min or l > max then return false,"should have "..min.."-"..max.." characters" end
+	if l < min or l > max then return false,"should have "..tostring(min).."-"..tostring(max).." characters" end
 	return true
 end
 
@@ -125,12 +126,12 @@ end
 
 -- Numbers
 function valua._min(value,n)
-	if not empty(value) and value < n then return false,"must be greater than "..n end
+	if not empty(value) and value < n then return false,"must be greater than "..tostring(n) end
 	return true
 end
 
 function valua._max(value,n)
-	if not empty(value)  and value > n then return false,"must not be greater than "..n end
+	if not empty(value)  and value > n then return false,"must not be greater than "..tostring(n) end
 	return true
 end
 

@@ -3,7 +3,7 @@ local passing = true
 
 local function check(val_test, test_value, expected, n)
 	local res,err = val_test(test_value)
-	local msg = "Validation "..n.." "
+	local msg = "Validation "..tostring(n).." "
 
 	if res == expected then
 		msg = msg.. "succeeded"
