@@ -17,25 +17,25 @@ local function check(val_test, test_value, expected, n)
 end
 
 local test_values = {
-	"test string!",
-	"hey",
-	"",
-	nil,
-	true,
-	42,
-	1337,
-	'26/10/1980',
-	'10-26-1980',
-	'29.02.2014',
-	'29/02/2016',
-	'a@a.com',
-	'asd123',
-	5.7,
-	{},
-	{3,46},
-	"<script>alert('boohoo@email.com XSS');</script>",
-	"test-123_maria.2@newdomain.wow.movie",
-	"10/06/1980 10:32:10"
+	 [1] = "test string!",
+	 [2] = "hey",
+	 [3] = "",
+	 [4] = nil,
+	 [5] = true,
+	 [6] = 42,
+	 [7] = 1337,
+	 [8] = '26/10/1980',
+	 [9] = '10-26-1980',
+	[10] = '29.02.2014',
+	[11] = '29/02/2016',
+	[12] = 'a@a.com',
+	[13] = 'asd123',
+	[14] = 5.7,
+	[15] = {},
+	[16] = {3,46},
+	[17] = "<script>alert('boohoo@email.com XSS');</script>",
+	[18] = "test-123_maria.2@newdomain.wow.movie",
+	[19] = "10/06/1980 10:32:10"
 }
 
 local tests = {
