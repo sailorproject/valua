@@ -63,8 +63,8 @@ local tests = {
 	{v:new().contains(" "), {2,false, 1,true}},
 	{v:new().no_white(), {1,false, 2,true}},
 	{v:new().datetime(), {19,true, 9,false}},
-  {v:new().number().min(45).optional(), {2,false, 6,false, 7,true, 4,true}},
-  {v:new().string().optional(), {14,false, 1,true, 4,true}},
+	{v:new().number().min(45).optional(), {2,false, 6,false, 7,true, 4,true}},
+	{v:new().string().optional(), {14,false, 1,true, 4,true}},
 }
 
 for n,t in ipairs(tests) do
