@@ -42,13 +42,14 @@ local tests = {
 	{v:new().type("string").len(3,5), {1,false}},
 	{v:new().type("number").len(3,5), {1,false}},
 	{v:new().type("table").empty(), {15,true, 16,false, 1,false}},
+--  require('mobdebug').start('127.0.0.1')
 	{v:new().not_empty(), {2,true, 3,false, 4,false, 16,true, 5,true, 6,true}},
 	{v:new().len(2,10), {2,true}},
 	{v:new().type("number"), {2,false}},
 	{v:new().empty(), {3,true, 4,true, 5,false, 6,false}},
 	{v:new().boolean(), {1,false, 5,true}},
 	{v:new().compare("hey"), {1,false, 2,true}},
-	{v:new().number().min(45), {2,false, 6,false, 7,true}},
+	{v:new().number().min(45), {2,false, 6,false, 7,true, 4,false}},
 	{v:new().number().max(1009), {7,false, 6,true}},
 	{v:new().date(), {9,false, 10,false, 11,true, 8,true}},
 	{v:new().date('us'), {8,false, 9,true}},
@@ -56,12 +57,14 @@ local tests = {
 	{v:new().in_list({"hey",42}), {12,false, 6,true, 2,true}},
 	{v:new().match("^%d+%p%d+%p%d%d%d%d$"), {1,false, 8,true}},
 	{v:new().alnum(), {8,false, 13,true}},
-	{v:new().integer(), {14,false, 6,true}},
-	{v:new().string(), {14,false, 1,true}},
+	{v:new().integer(), {14,false, 6,true,}},
+	{v:new().string(), {14,false, 1,true, 4,false}},
 	{v:new().string().alnum(), {6,false}},
 	{v:new().contains(" "), {2,false, 1,true}},
 	{v:new().no_white(), {1,false, 2,true}},
-	{v:new().datetime(), {19,true, 9,false}}
+	{v:new().datetime(), {19,true, 9,false}},
+  {v:new().number().min(45).optional(), {2,false, 6,false, 7,true, 4,true}},
+  {v:new().string().optional(), {14,false, 1,true, 4,true}},
 }
 
 for n,t in ipairs(tests) do
