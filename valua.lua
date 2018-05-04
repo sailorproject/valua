@@ -54,7 +54,8 @@ function valua:new(obj)
 	-- __call will run only when the value is validated
 	self.__call = function(t,value)
 		local res = true
-		local fres, err = nil
+    local err = nil
+    local fres
 
     if value == nil and t.allow_nil then
       return res, err
