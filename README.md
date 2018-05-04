@@ -29,43 +29,44 @@ reusable_validation("test!") -- true
 
 #### Current validation functions
 
-  * alnum() - 
+  * alnum() -
 Checks if string is alphanumeric.
-  * boolean() - 
+  * boolean() -
 Checks if value is a boolean.
-  * compare(another_value) - 
+  * compare(another_value) -
 Checks if value is equal to another value.
-  * contains(substr) - 
+  * contains(substr) -
 Checks if a string contains a substring.
-  * date() or date(format) -  
+  * date() or date(format) -
 Checks if a string is a valid date. Default format is UK (dd/mm/yyyy). Also checks for US and ISO formats.
-  * email() - 
+  * email() -
 Checks if a string is a valid email address.
-  * empty() - 
+  * empty() -
 Checks if a value is empty.
-  * integer() - 
+  * integer() -
 Checks if a number is an integer;
-  * in_list(list) - 
+  * in_list(list) -
 Checks if a value is inside an array.
   * len(min,max) -
 Checks if a string's length is between min and max.
   * match(pattern) -
 Checks if a string matches a given pattern.
-  * max(n) - 
+  * max(n) -
 Checks if a number is equal or less than n.
-  * min(n) - 
+  * min(n) -
 Checks if a number is equal or greater than n.
-  * not_empty() - 
+  * not_empty() -
 Checks if a value is not empty.
-  * no_white() - 
+  * no_white() -
 Checks if a string contains no white spaces.
-  * number() - 
+  * number() -
 Checks if a value is a number.
-  * string() - 
+  * string() -
 Checks if a value is a string.
   * type(t) -
 Checks if a value is of type t.
-
+  * optional(t) -
+If value is `nil` it would be accepted. If it's not `nil` it would be processed with other chained validation functions as usually done.
 
 
 Copyright (c) 2014 Etiene Dalcol
