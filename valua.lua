@@ -41,8 +41,12 @@ function valua:new(obj)
 		--saves a function named _<index> with its args in a funcs table, to be used later when validating
 		return function(...)
 			local args = pack(...)
-			local f = function(value) return valua['_'..k](value, unpack(args, 1, args.n)) end
-			tinsert(t.funcs,f)
+			if k == 'optional' then
+				obj.allow_nil = true
+			else
+				local f = function(value) return valua['_'..k](value, unpack(args, 1, args.n)) end
+				tinsert(t.funcs,f)
+			end
 			return t
 		end
 	end
@@ -50,7 +54,13 @@ function valua:new(obj)
 	-- __call will run only when the value is validated
 	self.__call = function(t,value)
 		local res = true
-		local fres, err
+		local err = nil
+		local fres
+
+		if value == nil and t.allow_nil then
+			return res, err
+		end
+
 		-- iterates through all chained validations funcs that were packed, passing the value to be validated
 		for _,f in ipairs(t.funcs) do
 			fres,err = f(value)
@@ -64,6 +74,7 @@ function valua:new(obj)
 		return res,err
 	end
 	obj.funcs = {}
+	obj.allow_nil = false
 	return obj
 end
 --
