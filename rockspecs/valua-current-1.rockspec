@@ -12,14 +12,12 @@ description = {
    license = "MIT"
 }
 dependencies = {
-   "lua >= 5.1, < 5.4",
+   "lua >= 5.1, < 5.5",
    "busted >= 2.0.rc10",
 }
 build = {
-   type = "none",
-   install ={
-      lua ={
-         valua = "valua.lua"
-      }
+   type = "builtin",
+   modules = {
+      valua = "valua.lua"
    }
 }
